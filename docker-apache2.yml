@@ -1,0 +1,6 @@
+---
+- name: install and run apache2 in docker container
+  hosts: web
+
+  roles:
+    - docker-apache2

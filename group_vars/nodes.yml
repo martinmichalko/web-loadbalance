@@ -1,0 +1,27 @@
+---
+
+packages:
+  - epel-release
+  - python
+  - docker
+  - rsync
+  - net-tools
+  
+install_pip: install
+
+pip_packages:
+  - docker-py
+
+#docker registry version
+docker_registry: registry
+#vesion 2 will be requested with this command
+# docker_registry: registry:2
+
+#docker registry node placement
+docker:
+  #registry: "{{ hostvars[groups['nodes'][0]]['ansible_fqdn'] }}:5000"
+  registry: "manager.web.mate.solutions:5000"
+
+#list of containers to be added to the docker registry
+dockerfiles:
+  - apache2

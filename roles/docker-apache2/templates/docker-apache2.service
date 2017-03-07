@@ -1,0 +1,12 @@
+[Unit]
+Description=Apache2 container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a apache2-{{ inventory_hostname_short }}
+ExecStop=/usr/bin/docker stop apache2-{{ inventory_hostname_short }}
+
+[Install]
+WantedBy=default.target

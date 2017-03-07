@@ -1,0 +1,58 @@
+---
+#APACHE2 for CentOS
+#prepare config directory in two steps create it and copy
+#prepared configuration files from central location
+- name: prepare config directory
+  file:
+    path: /dir-config/apache2
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: prepare data directory
+  file:
+    path: /dir-data/apache2
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: copy the data files
+  copy:
+    src: "{{ inventory_dir }}/docker/apache2/dir-data/"
+    dest: /dir-data/apache2
+
+#run -d --network host -v /dir-config/apache2:/dir-config/:ro -v /dir-data/apache2:/dir-data/:rw --name apache2 apache2
+
+- name: update firewall rules to accept the web traffic
+  firewalld:
+    port: 80/tcp
+    permanent: true
+    state: enabled
+  tags: firewall
+
+# selinux dactivation or rights correction has to be performed before
+
+- name: Start a apache2 container
+  docker_container:
+    name: apache2-{{ inventory_hostname_short }}
+    image: "{{ docker.registry }}/apache2"
+    network_mode: host
+    volumes:
+      - /dir-config/apache2:/dir-config:rw
+      - /dir-data/apache2:/dir-data:rw
+#    command:
+
+- name: configure automatic start of container apache2 during boot
+  template:
+    src: docker-apache2.service
+    dest: /etc/systemd/system/docker-apache2.service
+    owner: root
+    group: root
+    mode: 0755
+
+- name: service enable  for container apache2
+  systemd:
+    name: docker-apache2.service
+    enabled: yes

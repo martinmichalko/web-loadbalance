@@ -1,0 +1,28 @@
+---
+#DEBIAN
+- name: DBUG variable inventory_dir
+  debug:
+    msg: "{{inventory_dir}}/pkg-requirements.yml"
+  tags: debug
+
+- name: install additional packages with apt
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items: "{{packages}}"
+  when: packages is defined
+
+- block:
+    - name: check if the pip is already installed
+      command: pip3 list --format freeze | grep pip
+      register: pip_check
+  rescue:
+    - name: pip is not installed and going to install it
+      command: easy_install3 -U pip
+
+- name: install with pip
+  pip:
+    executable: pip3
+    name: "{{item}}"
+  with_items: "{{pip_packages}}"
+  when: pip_packages is defined

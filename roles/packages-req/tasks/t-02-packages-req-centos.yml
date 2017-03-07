@@ -1,0 +1,34 @@
+---
+#CENTOS
+- name: install additional packages with yum
+  yum:
+    name: "{{item}}"
+    state: present
+  with_items: "{{packages}}"
+
+- name: DEBUG variableinstall_pip
+  debug:
+    var: install_pip
+
+- block:
+  - name: download get-pip from https://bootstrap.pypa.io/get-pip.py
+    get_url:
+      url: https://bootstrap.pypa.io/get-pip.py
+      dest: /root/get-pip.py
+
+  - name: install the downloaded pip with python
+    command: python /root/get-pip.py
+    #command: python3 /root/get-pip.py
+
+  - name: delete the downloaded file
+    file:
+      path: /root/get-pip.py
+      state: absent
+  when: install_pip == "install"
+
+- name: install with pip
+  pip:
+    #executable: pip3
+    name: "{{item}}"
+  with_items: "{{pip_packages}}"
+  when: pip_packages is defined
