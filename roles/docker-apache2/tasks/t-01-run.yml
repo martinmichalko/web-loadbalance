@@ -19,10 +19,13 @@
     mode: 0755
 
 - name: copy the data files
-  copy:
-    src: "{{ inventory_dir }}/docker/apache2/dir-data/"
-    dest: /dir-data/apache2
-
+  template:
+    src: "{{ inventory_dir }}/docker/apache2/dir-data/index.html"
+    dest: /dir-data/apache2/index.html
+    owner: root
+    group: root
+    mode: 0644
+  tags: distribute_data
 #run -d --network host -v /dir-config/apache2:/dir-config/:ro -v /dir-data/apache2:/dir-data/:rw --name apache2 apache2
 
 - name: update firewall rules to accept the web traffic
@@ -51,8 +54,10 @@
     owner: root
     group: root
     mode: 0755
+  tags: automatic_start
 
 - name: service enable  for container apache2
   systemd:
     name: docker-apache2.service
     enabled: yes
+  tags: automatic_start
