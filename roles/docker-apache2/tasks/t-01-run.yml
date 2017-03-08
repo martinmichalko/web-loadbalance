@@ -28,15 +28,6 @@
   tags: distribute_data
 #run -d --network host -v /dir-config/apache2:/dir-config/:ro -v /dir-data/apache2:/dir-data/:rw --name apache2 apache2
 
-- name: update firewall rules to accept the web traffic
-  firewalld:
-    port: 80/tcp
-    permanent: true
-    state: enabled
-  tags: firewall
-
-# selinux dactivation or rights correction has to be performed before
-
 - name: Start a apache2 container
   docker_container:
     name: apache2-{{ inventory_hostname_short }}

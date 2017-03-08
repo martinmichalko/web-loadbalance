@@ -1,0 +1,16 @@
+---
+
+#- name: update firewall rules to accept the web traffic
+#  firewalld:
+#    port: 80/tcp
+#    permanent: true
+#    state: enabled
+#  tags: firewall
+#
+## selinux dactivation or rights correction has to be performed before
+
+- name: stop firewalld on all nodes
+  systemd:
+    name: firewalld
+    state: stopped
+    enabled: no

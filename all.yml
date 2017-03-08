@@ -4,3 +4,5 @@
 - include: docker.yml
 - include: docker-registry.yml
 - include: docker-apache2.yml
+- include: haproxy.yml
+- include: firewall-config.yml

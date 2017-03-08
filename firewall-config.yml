@@ -1,0 +1,6 @@
+---
+- name: install and configure haproxy on manager.web.mate.solutions
+  hosts: all:!localhost
+
+  roles:
+    - firewall-config.yml
