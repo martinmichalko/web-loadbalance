@@ -1,0 +1,5 @@
+---
+#init k8
+- name: join the cluster for nodes
+  command: kubeadm join --token=d3f69b.88227d02a3e8cb89 manager.web.mate.solutions
+  when:  '"{{ inventory_hostname }}" != "manager.web.mate.solutions"'

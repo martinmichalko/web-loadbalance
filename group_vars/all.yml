@@ -6,8 +6,8 @@ dns_resolver: 192.168.1.1
 vm_distribution: centos
 vm_release: 7.3
 
-#for centos image disk size is not working
-vm_image_size: 5G
+#for centos image disk size is working only default 6G and custom 10G
+vm_image_size: 10G
 
 vm_memory: 1024
 vm_image_dir: /virt/sen-imgs
@@ -46,6 +46,7 @@ dns_planned: False
 additional_packages:
   - vim
   - ranger
+  - git
 
 proxy_env:
   http_proxy: "http://192.168.1.1:3128"

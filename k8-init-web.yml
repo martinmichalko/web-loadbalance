@@ -1,0 +1,5 @@
+---
+- name: configure k8
+  hosts: web
+  roles:
+    - k8-init-nodes

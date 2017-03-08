@@ -3,4 +3,4 @@
   hosts: all:!localhost
 
   roles:
-    - firewall-config.yml
+    - firewall-config

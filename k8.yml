@@ -1,0 +1,4 @@
+---
+- include: k8-install.yml
+- include: k8-init-master.yml
+- include: k8-init-web.yml

@@ -6,3 +6,4 @@
 - include: docker-apache2.yml
 - include: haproxy.yml
 - include: firewall-config.yml
+- include: k8.yml
