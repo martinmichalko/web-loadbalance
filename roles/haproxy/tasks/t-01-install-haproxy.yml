@@ -1,0 +1,24 @@
+---
+
+- name: install ha-proxy package
+  yum:
+    name: haproxy
+
+- name: set the new config file to the haproxy /etc/haproxy/haproxy.cfg
+  template:
+    src: haproxy.cfg
+    dest: /etc/haproxy/haproxy.cfg
+    owner: root
+    group: root
+    mode: 0644
+
+- name: restart service haproxy
+  systemd:
+    name: haproxy
+    state: restarted
+    enabled: yes
+
+- firewalld:
+    port: 80/tcp
+    permanent: true
+    state: enabled

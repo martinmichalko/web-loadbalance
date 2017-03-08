@@ -1,0 +1,7 @@
+---
+- name: install and configure haproxy on manager.web.mate.solutions
+  hosts: manager.web.mate.solutions
+
+  roles:
+    - haproxy
+  environment: "{{proxy_env}}"

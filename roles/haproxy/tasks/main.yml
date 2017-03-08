@@ -1,0 +1,3 @@
+---
+- include: t-01-install-haproxy.yml
+- include: t-02-rsyslog.yml

@@ -1,0 +1,10 @@
+# general file log
+local7.*    /var/log/custom/logs
+
+#programname
+#the “static” part of the tag, as defined by BSD syslogd.
+#For example, when TAG is “named[12345]”, programname is “named”.
+# with this newer syntax is not possible to use isequal but == works fine
+
+
+if $programname == "haproxy" then /var/log/custom/haproxy.log

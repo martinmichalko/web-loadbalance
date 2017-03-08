@@ -1,0 +1,67 @@
+---
+
+- name: Install required packages for rsyslog and logrotate
+  yum:
+    name: '{{ item }}'
+    state: 'present'
+  with_items:
+    - rsyslog
+    - logrotate
+
+# replacement of 4 lines starting:
+# provides UDP syslog reception
+#$ModLoad imudp
+#$UDPServerRun 514
+#
+# provides TCP syslog reception
+#$ModLoad imtcp
+#$InputTCPServerRun 514
+
+- name: UDP syslog reception load module
+  lineinfile:
+    dest: /etc/rsyslog.conf
+    regexp: "ModLoad imudp"
+    insertafter: "^# provides UDP syslog reception "
+    line: "$ModLoad imudp"
+
+- name: UDP syslog reception port definition
+  lineinfile:
+    dest: /etc/rsyslog.conf
+    regexp: "UDPServerRun 514"
+    insertafter: "^$ModLoad imudp"
+    line: "$UDPServerRun 514"
+
+- name: TCP syslog reception load module
+  lineinfile:
+    dest: /etc/rsyslog.conf
+    regexp: "ModLoad imtcp"
+    insertafter: "^# provides TCP syslog reception "
+    line: "$ModLoad imtcp"
+
+- name: TCP syslog reception port definition
+  lineinfile:
+    dest: /etc/rsyslog.conf
+    regexp: "InputTCPServerRun 514"
+    insertafter: "^$ModLoad imtcp "
+    line: "$InputTCPServerRun 514"
+
+#end of 4 lines replacement
+
+- name: setup rsyslog for custom logs
+  template:
+    src: rsyslog-custom.conf.j2
+    dest: /etc/rsyslog.d/rsyslog-custom.conf
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+
+- name: setup logrotate for custom logs
+  template:
+    src: logrotate-custom.conf.j2
+    dest: /etc/logrotate.d/logrotate-custom.conf
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+
+- name: restart rsyslog
+  command: systemctl restart rsyslog.service
