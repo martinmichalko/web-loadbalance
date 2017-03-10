@@ -3,10 +3,10 @@
 packages:
   - epel-release
   - python
-  - docker
+  - docker #-1.10.3-59.el7.centos.x86_64 does not work with insecure registry ?
   - rsync
   - net-tools
-  
+
 install_pip: install
 
 pip_packages:
@@ -20,8 +20,11 @@ docker_registry: registry
 #docker registry node placement
 docker:
   #registry: "{{ hostvars[groups['nodes'][0]]['ansible_fqdn'] }}:5000"
-  registry: "manager.web.mate.solutions:5000"
-
+  registry: "{{ hostvars[groups['manager'][0]]['ansible_fqdn'] }}:5000"
+  manager: "{{ hostvars[groups['manager'][0]]['ansible_fqdn'] }}"
 #list of containers to be added to the docker registry
 dockerfiles:
   - apache2
+
+dockerfile_version: v2
+#or latest

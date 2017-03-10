@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: apache2-pod
+spec:
+  containers:
+  - image: localhost:5000/apache2:v1
+    name: apache2
+    volumeMounts:
+    - mountPath: /dir-data
+      name: data-volume
+  volumes:
+  - name: data-volume
+    hostPath:
+      # directory location on host
+      path: /dir-data/apache2
+#  hostNetwork: true
+#  - hostPort: 80
+#    protocol: TCP
+#  - containerPort: 80
+#    protocol: TCP

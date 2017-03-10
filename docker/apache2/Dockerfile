@@ -17,6 +17,7 @@ VOLUME /dir-data
 ## copy startup scripts and configuration files
 COPY scripts /app/
 COPY configs /app/configs
+COPY dir-data /app/data
 
 # Define workdir
 WORKDIR /app

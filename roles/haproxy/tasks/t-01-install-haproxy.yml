@@ -3,6 +3,8 @@
 - name: install ha-proxy package
   yum:
     name: haproxy
+    disable_gpg_check: yes
+    state: present
 
 - name: set the new config file to the haproxy /etc/haproxy/haproxy.cfg
   template:
@@ -18,7 +20,8 @@
     state: restarted
     enabled: yes
 
-- firewalld:
-    port: 80/tcp
-    permanent: true
-    state: enabled
+#firewall is stopped
+#- firewalld:
+#    port: 80/tcp
+#    permanent: true
+#    state: enabled

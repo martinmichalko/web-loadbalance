@@ -1,6 +1,6 @@
 ---
 - name: install docker registry
-  hosts: manager.web.mate.solutions
+  hosts: manager.web.mate.solutions:manager.web2.mate.solutions
 
   roles:
 #    - { role: docker-registry-centos, when: ansible_distribution == 'CentOS' }

@@ -1,0 +1,6 @@
+---
+- name: install and run apache2 on web nodes
+  hosts: web
+
+  roles:
+    - apache2-centos

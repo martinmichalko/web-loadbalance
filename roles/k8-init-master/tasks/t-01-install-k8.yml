@@ -1,9 +1,9 @@
 ---
 #init k8
-- name: initiate the cluster on master
+- name: initiate the cluster on master "{{ docker.manager }}"
   command: kubeadm init --token d3f69b.88227d02a3e8cb89
-  when: '"{{ inventory_hostname }}" == "manager.web.mate.solutions"'
+  when: '"{{ inventory_hostname }}" == "{{ docker.manager }}"'
 
 - name: initiate the cluster on master
   command: "kubectl apply -f http://docs.projectcalico.org/v2.0/getting-started/kubernetes/installation/hosted/kubeadm/calico.yaml"
-  when: '"{{ inventory_hostname }}" == "manager.web.mate.solutions"'
+  when: '"{{ inventory_hostname }}" == "{{ docker.manager }}"'

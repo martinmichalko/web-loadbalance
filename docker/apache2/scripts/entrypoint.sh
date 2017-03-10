@@ -23,9 +23,18 @@ if [ ! -f "${initfile}" ]; then
     #whole data directory  /var/www/html/
     #if the directory dir-data is not empty than
     if [ ! -z "$(ls -A /dir-data)" ]; then
-      echo "external data provided - link will be created";
-      rm -r /var/www/html;
-      ln -s /dir-data /var/www/html;
+        echo "external data not provided - own data will be used to prepare dir-data";
+        echo "this procedure will perform only during first run";
+
+        rm -r /var/www/html;
+        ln -s /dir-data /var/www/html;
+        cat <<EOF > /dir-data/index.html
+        <html>
+        <body>
+        <p>hostname is: $(hostname)</p>
+        </body>
+        </html>
+EOF
 
     touch ${initfile};
     echo "first start finished";

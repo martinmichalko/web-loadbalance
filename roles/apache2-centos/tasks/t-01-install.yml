@@ -1,0 +1,20 @@
+---
+
+- name: install apache
+  yum:
+    name: httpd
+    state: present
+#
+#- name: place the deactivated welcome screen
+#  template:
+#    src: welcome.conf
+#    dest: /etc/httpd/conf.d/welcome.conf
+#    owner: root
+#    group: root
+#    mode: 0644
+#
+- name: start and enable apache2
+  systemd:
+    name: httpd
+    state: started
+    enabled: yes

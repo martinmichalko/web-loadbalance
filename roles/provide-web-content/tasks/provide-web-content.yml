@@ -1,0 +1,9 @@
+---
+
+- name: provide-web-content on the web nodes
+  template:
+    src: index.html
+    dest: /var/www/html
+    owner: root
+    group: root
+    mode: 0644

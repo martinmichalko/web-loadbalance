@@ -1,0 +1,6 @@
+---
+- name: provide web content on web nodes
+  hosts: web
+
+  roles:
+    - provide-web-content

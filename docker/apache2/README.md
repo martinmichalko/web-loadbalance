@@ -1,3 +1,3 @@
-### start the apache server
+### start the apache server for testing
 
-docker run --network host -d --name apache -v /data/projects/ansible2-2/pb/mariadb/docker/apache2/dir-data/:/var/www/html/:rw apache
+docker run --network host --rm --name apache2 -v /dir-data/apache2:/dir-data:rw localhost:5000/apache2
