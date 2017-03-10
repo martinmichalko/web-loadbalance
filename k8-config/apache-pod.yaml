@@ -4,7 +4,7 @@ metadata:
   name: apache2-pod
 spec:
   containers:
-  - image: localhost:5000/apache2:v1
+  - image: manager.web.mate.solutions:5000/apache2:v2
     name: apache2
     volumeMounts:
     - mountPath: /dir-data
@@ -14,7 +14,7 @@ spec:
     hostPath:
       # directory location on host
       path: /dir-data/apache2
-#  hostNetwork: true
+  hostNetwork: true
 #  - hostPort: 80
 #    protocol: TCP
 #  - containerPort: 80

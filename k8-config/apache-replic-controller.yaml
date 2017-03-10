@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   name: apache2
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     name: apache2
     version: v2
@@ -14,11 +14,11 @@ spec:
         version: v2
     spec:
       containers:
-      - image: localhost:5000/apache2:v2
+      - image: manager.web.mate.solutions:5000/apache2:v2
         name: apache2
         ports:
         - containerPort: 80
-          protocol: TCP
+
 
 #        hostNetwork: true
 #        - hostPort: 80

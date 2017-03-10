@@ -23,6 +23,8 @@ COPY dir-data /app/data
 WORKDIR /app
 RUN chmod u+x /app/*
 
+EXPOSED 80
+
 ENTRYPOINT ["/app/entrypoint.sh"]
 
 CMD ["/usr/sbin/apachectl", "-DFOREGROUND"]
