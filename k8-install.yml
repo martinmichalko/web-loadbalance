@@ -1,7 +1,0 @@
----
-- name: install and configure k8
-  hosts: all:!localhost
-  roles:
-    #- firewall-config
-    - k8-centos
-  environment: "{{proxy_env}}"

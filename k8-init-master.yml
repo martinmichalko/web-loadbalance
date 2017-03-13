@@ -1,5 +1,0 @@
----
-- name: configure k8
-  hosts: manager.web.mate.solutions:manager.web2.mate.solutions
-  roles:
-    - k8-init-master

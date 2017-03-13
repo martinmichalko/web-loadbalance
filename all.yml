@@ -1,10 +1,11 @@
 ---
 - include: firewall-config.yml
 - include: packages-req.yml
-- include: docker.yml
-- include: docker-registry.yml
+#- include: docker.yml
+#- include: docker-registry.yml
 #- include: docker-apache2.yml
 
 - include: haproxy.yml
 
-- include: k8.yml
+- include: apache2.yml
+- include: provide-web-content.yml

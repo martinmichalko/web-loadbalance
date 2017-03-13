@@ -2,8 +2,8 @@
 set -e
 set -x
 #build the environment
-#ansible-playbook -i backup/inventory /data/projects/ansible2-2/pb/virtuale/create-update-config.yml \
-#    --extra-vars "@backup/group_vars/all.yml" --extra-vars "@backup/group_vars/nodes.yml"
+ansible-playbook -i backup/inventory /data/projects/ansible2-2/pb/virtuale/create-update-config.yml \
+    --extra-vars "@backup/group_vars/all.yml" --extra-vars "@backup/group_vars/nodes.yml"
 
 #prepare for apache
 ansible-playbook -i backup/inventory \
