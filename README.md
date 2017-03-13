@@ -6,3 +6,8 @@ following environment will be created all in CentOS 7
 - each web server is in the docker container
 virtual machine with load balancer - haproxy and docker registry to deploy the images on nodes
 - haproxy is configured with level 4 roundrobin loadbalancing
+
+with this command the environment will be prepared:
+```bash
+ansible-playbook -i inventory all.yml
+```
